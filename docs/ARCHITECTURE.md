@@ -251,6 +251,39 @@ When the guard sends a triage question with buttons ("I know them" / "Lock now")
 **Reads**: Environment variable `AARON_PRIVATE_DIR` (if set)
 **Writes**: Creates `logs/` subfolder if it doesn't exist
 
+### src/download_models.py
+
+**Purpose**: Download the five third-party models that Aaron needs into misc/. Verifies integrity, skips files already present and valid, and re-downloads corrupted ones.
+
+**Usage**: `python src/download_models.py`
+
+**Models Downloaded**:
+1. **face_detection_yunet_2023mar.onnx** - YuNet face detector (OpenCV)
+   - Source: `media.githubusercontent.com/media/opencv/opencv_zoo/main/models/face_detection_yunet/...`
+   - Verified: sha256 hash
+2. **face_recognition_sface_2021dec.onnx** - SFace face recognizer (OpenCV)
+   - Source: `media.githubusercontent.com/media/opencv/opencv_zoo/main/models/face_recognition_sface/...`
+   - Verified: sha256 hash
+3. **lbfmodel.yaml** - 68-point facial landmarks
+   - Source: `raw.githubusercontent.com/kurnianggoro/GSOC2017/master/data/lbfmodel.yaml`
+   - Verified: sha256 hash
+4. **gesture_recognizer.task** - MediaPipe hand gesture recognizer
+   - Source: `storage.googleapis.com/mediapipe-models/gesture_recognizer/...float16/latest/...`
+   - Verified: Minimum file size (1 MB) since URL tracks "latest"
+5. **vosk-model-small-en-us-0.15.zip** - Vosk English speech recognition model
+   - Source: `alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip`
+   - Verified: Expected subdirectories (am, conf, graph) after extraction
+
+**Key Features**:
+- **Atomic downloads**: Uses .part extension during download; renamed only after verification succeeds
+- **Corruption detection**: Removes incomplete or invalid files and re-downloads
+- **Interrupted-download safety**: Incomplete .part files never get mistaken for valid models
+- **Vosk special handling**: Extracts zip to misc/, verifies subdirectories present
+- **Standard library only**: No external dependencies beyond what Aaron already imports
+
+**Reads**: Network (upstream URLs)
+**Writes**: `misc/face_detection_yunet_2023mar.onnx`, `misc/face_recognition_sface_2021dec.onnx`, `misc/lbfmodel.yaml`, `misc/gesture_recognizer.task`, `misc/vosk-model-small-en-us-0.15/`
+
 ### src/face_engine.py
 
 **Purpose**: Shared face detection and recognition engine using OpenCV's modern models.

@@ -127,20 +127,20 @@ venv\Scripts\pip install -r misc\requirements.txt
 
 ### 3. Download Models
 
-The following large model files are NOT included in the repo. Download them and place them in the `misc/` folder:
+The large model files are not included in the repo but are downloaded on demand. After installing dependencies, run:
 
-- **face_detection_yunet_2023mar.onnx** - YuNet face detector (OpenCV)
-  - ~7 MB, available from OpenCV's model zoo
-- **face_recognition_sface_2021dec.onnx** - SFace face recognizer (OpenCV)
-  - ~23 MB, available from OpenCV's model zoo
-- **gesture_recognizer.task** - MediaPipe gesture recognizer
-  - ~27 MB, available from MediaPipe's model zoo
-- **lbfmodel.yaml** - 68-point facial landmarks
-  - ~100 KB, available from OpenCV's data folder
-- **vosk-model-small-en-us-0.15/** - Vosk speech recognition model
-  - ~40 MB, available from Vosk's model repository
+```cmd
+python src/download_models.py
+```
 
-See the code comments in `src/face_engine.py`, `src/gesture.py`, `src/voice_engine.py` for exact download locations.
+This script downloads all five third-party models (~170 MB total) into `misc/`:
+- YuNet face detector (~7 MB)
+- SFace face recognizer (~23 MB)
+- MediaPipe gesture recognizer (~27 MB)
+- Facial landmarks (lbfmodel.yaml, ~100 KB)
+- Vosk speech recognition model (~40 MB)
+
+The script verifies all files (sha256 hash where the upstream file is fixed; minimum size for the MediaPipe 'latest' file), skips files already present and valid, and re-downloads corrupted ones. Safe to re-run anytime.
 
 ### 4. Create Private Folder & Copy Example Configs
 

@@ -7,10 +7,12 @@
 ### Changes
 
 - **New src/paths.py**: Single source of truth for file locations. Personal data (Telegram config, face/voice embeddings, gesture data, evidence photos, logs, guard_command.json) moved OUT of repo into private folder (default `%USERPROFILE%\Desktop\Aaron_Private`, override with `AARON_PRIVATE_DIR` environment variable).
+- **New src/download_models.py**: Automated model downloader for all five third-party models (YuNet detector, SFace recognizer, MediaPipe gesture recognizer, facial landmarks, Vosk speech model). Verifies integrity via sha256 or minimum size, skips files already valid, and re-downloads corrupted ones. Safe to re-run.
 - **New misc/examples/**: Template config files (`telegram_config.example.json`, `gesture_actions.example.json`) for cloners to copy into private folder.
 - **Updated .gitignore**: Excludes all private data, logs, third-party models (downloaded separately), venv, and pycache.
 - **Updated batch/ launchers**: All .bat and .vbs scripts now resolve paths relative to their own location (no hardcoded user-specific paths).
-- **Comprehensive documentation**: All docs updated to reflect new private folder structure, added "First-time Setup" guide with model download instructions, and removed personal information (usernames, personal names, hardcoded paths).
+- **Updated README.md**: First-time setup now directs users to run `python src/download_models.py` instead of manual model download instructions.
+- **Comprehensive documentation**: All docs updated to reflect new private folder structure, added "First-time Setup" guide, and removed personal information (usernames, personal names, hardcoded paths).
 
 ### Current Feature Set
 
