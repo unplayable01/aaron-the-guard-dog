@@ -1,0 +1,7 @@
+{
+  "bot_token": "PASTE_YOUR_BOT_TOKEN_HERE",
+  "chat_id": "PASTE_YOUR_CHAT_ID_HERE",
+  "friends": {
+    "friend_username": "PASTE_THEIR_CHAT_ID_HERE"
+  }
+}

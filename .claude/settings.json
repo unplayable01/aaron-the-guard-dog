@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/doc_update.sh\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

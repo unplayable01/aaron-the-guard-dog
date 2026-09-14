@@ -1,0 +1,30 @@
+# --- Private data (lives in Desktop/Aaron_Private by design) ---
+# Safety net in case any of it is ever copied back into the repo.
+telegram_config.json
+model_embeddings.json
+voice_profile.json
+gesture_model.json
+gesture_actions.json
+guard_command.json
+dataset/
+gesture_dataset/
+evidence/
+Aaron_Private/
+*.log
+
+# --- Third-party models (large; download separately, see docs) ---
+misc/*.onnx
+misc/*.task
+misc/lbfmodel.yaml
+misc/haarcascade_frontalface_default.xml
+misc/vosk-model-*/
+
+# --- Local environment / tooling state ---
+venv/
+__pycache__/
+*.pyc
+.idea/
+.claude/settings.local.json
+docs/.doc_agent.log
+docs/.doc_agent.lock
+docs/.last_documented

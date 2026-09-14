@@ -1,0 +1,9 @@
+opencv-contrib-python
+numpy
+requests
+mediapipe
+vosk
+resemblyzer
+setuptools<81
+psutil
+sounddevice
